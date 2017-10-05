@@ -191,6 +191,211 @@ class pypve:
         data = self.connect('get', 'nodes/%s/qemu/%s/firewall/ipset/%s' % (self.node, vmid, name), None)
         return data
 
+    def addFirewallIpsetContent(self, vmid, name, post_data=None):
+        """
+        :param vmid:
+        :param name:
+        :return data:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/firewall/ipset/%s' % (self.node, vmid, name), post_data)
+        return data
+
+    def deleteFirewallIpsetContent(self, vmid, name):
+        """
+        :param vmid:
+        :param name:
+        :return data:
+        """
+        data = self.connect('delete', 'nodes/%s/qemu/%s/firewall/ipset/%s' % (self.node, vmid, name), None)
+        return data
+
+    def listFirewallIpsetCidr(self, vmid, name, cidr):
+        """
+        Read IP or Network settings from IPSet
+        :param vmid:
+        :param name:
+        :param cidr:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/ipset/%s/%s' % (self.node, vmid, name, cidr), None)
+        return data
+
+    def editFirewallIpsetCidr(self, vmid, name, cidr, post_data=None):
+        """
+        Read IP or Network settings from IPSet
+        :param vmid:
+        :param name:
+        :param cidr:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/firewall/ipset/%s/%s' % (self.node, vmid, name, cidr), post_data)
+        return data
+
+    def deleteFirewallIpsetCidr(self, vmid, name, cidr):
+        """
+        Read IP or Network settings from IPSet
+        :param vmid:
+        :param name:
+        :param cidr:
+        :return:
+        """
+        data = self.connect('delete', 'nodes/%s/qemu/%s/firewall/ipset/%s/%s' % (self.node, vmid, name, cidr), None)
+        return data
+
+    def listFirewallRules(self, vmid):
+        """
+
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/rules' % (self.node, vmid), None)
+        return data
+
+    def postFirewallRules(self, vmid, post_data=None):
+        """
+        Create new rule
+        :param vmid:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/firewall/rules' % (self.node, vmid), post_data)
+        return data
+
+    def listFirewallRules(self, vmid, pos):
+        """
+        Get single rule data.
+        :param vmid:
+        :param pos:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/rules/%s' % (self.node, vmid, pos), None)
+        return data
+
+    def putFirewallRules(self, vmid, pos, post_data=None):
+        """
+        Modify rule data.
+        :param vmid:
+        :param pos:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/firewall/rules/%s' % (self.node, vmid, pos), post_data)
+        return data
+
+    def listFirewallRules(self, vmid, pos):
+        """
+        Delete rule.
+        :param vmid:
+        :param pos:
+        :return:
+        """
+        data = self.connect('delete', 'nodes/%s/qemu/%s/firewall/rules/%s' % (self.node, vmid, pos), None)
+        return data
+
+    def readFirewallLog(self, vmid):
+        """
+        Read Firewall Logs
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/log' % (self.node, vmid), None)
+        return data
+
+    def getFirewallOptions(self, vmid):
+        """
+        Get VM Firewall options
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/options' % (self.node, vmid), None)
+        return data
+
+    def putFirewallOptions(self, vmid, post_data=None):
+        """
+        Get VM Firewall options
+        :param vmid:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/firewall/options' % (self.node, vmid), post_data)
+        return data
+
+    def listFirewallRefs(self, vmid):
+        """
+        Lists possible IPSet/Alias reference which are allowed in source/dest properties.
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/refs' % (self.node, vmid), None)
+        return data
+
+
+    """ Snapshot Operations"""
+
+    def listKvmSnapshot(self, vmid):
+        """
+        List all snapshots.
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/snaoshot' % (self.node, vmid), None)
+        return data
+
+    def createSnapshot(self, vmid, post_data=None):
+        """
+        List all snapshots.
+        :param vmid:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/snapshot' % (self.node, vmid), post_data)
+        return data
+
+    def getKvmSnapContent(self, vmid, snapname):
+        """
+        Get snapname content
+        :param vmid:
+        :param snapname:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/snapshot/%s' % (self.node, vmid, snapname), None)
+        return data
+
+    def deleteKvmSnapContent(self, vmid, snapname):
+        """
+        Delete snapname content
+        :param vmid:
+        :param snapname:
+        :return:
+        """
+        data = self.connect('delete', 'nodes/%s/qemu/%s/snapshot/%s' % (self.node, vmid, snapname), None)
+        return data
+
+    def getSnapnameConfig(self, vmid, snapname):
+        """
+        Get snapname Config
+        :param vmid:
+        :param snapname:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/snapshot/%s/config' % (self.node, vmid, snapname), None)
+        return data
+
+    def putSnapnameConfig(self, vmid, snapname, post_data=None):
+        """
+        Update snapname config
+        :param vmid:
+        :param snapname:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/snapshot/%s/config' % (self.node, vmid, snapname), post_data)
+        return data
+
+    def postSnapnameRollback(self, vmid, snapname):
+        """
+        Delete snapname content
+        :param vmid:
+        :param snapname:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/snapshot/%s/rollback' % (self.node, vmid, snapname), None)
+        return data
 
     """ Status Operations """
 

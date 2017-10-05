@@ -133,15 +133,224 @@ class pypve:
         data = self.connect('post', 'nodes/%s/qemu/%s/firewall/aliases' %(self.node, vmid), post_data)
         return data
 
+    def kvmFirewallReadAllias(self, vmid, name):
+        """Read alias. Return Object"""
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/aliases/%s' %(self.node, vmid, name), None)
+        return data
+
+    def editFirewallAllias(self, vmid, name, post_data={}):
+        """
+        Requeired rules : post_data {
+        'cidr' : string | Network/IP spectification in CIDR Format
+        'name' : string | Allias Name
+        }
+        :param vmid:
+        :param name:
+        :param post_data:
+        :return data:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/firewall/aliases/%s' %(self.node, vmid, name), post_data)
+        return data
+
+    def removeFirewallAllias(self, vmid, name):
+        """
+        :param vmid:
+        :param name:
+        :return data:
+        """
+        data = self.connect('delete', 'nodes/%s/qemu/%s/firewall/aliases/%s' % (self.node, vmid, name), None)
+        return data
+
+    def listFirewallIpset(self, vmid):
+        """
+        :param vmid:
+        :return data:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/ipset' % (self.node, vmid), None)
+        return data
+
+    def createFirewallIpset(self, vmid, post_data={}):
+        """
+        post_data = {
+        'name' = string
+        'digest' = string
+        }
+        :param vmid:
+        :param post_data:
+        :return data:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/firewall/ipset' % (self.node, vmid), post_data)
+        return data
+
+    def listFirewallIpsetContent(self, vmid, name):
+        """
+        :param vmid:
+        :param name:
+        :return data:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/firewall/ipset/%s' % (self.node, vmid, name), None)
+        return data
 
 
+    """ Status Operations """
 
+    def getDirectoryIndex(self, vmid):
+        """
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/status' % (self.node, vmid), None)
+        return data
 
+    def getKvmCurrent(self, vmid):
+        """
+        :param vmid:
+        :return data:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/status/current' % (self.node, vmid), None)
+        return data
 
+    def postKvmReset(self, vmid, post_data=None):
+        """
+        :param vmid:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/status/reset' % (self.node, vmid), post_data)
+        return data
 
+    def postKvmResume(self, vmid, post_data=None):
+        """
+        :param vmid:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/status/resume' % (self.node, vmid), post_data)
+        return data
 
+    def postKvmShutdown(self, vmid, post_data=None):
+        """
+        :param vmid:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/status/shutdown' % (self.node, vmid), post_data)
+        return data
 
+    def postKvmStart(self, vmid, post_data=None):
+        """
+        :param vmid:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/status/start' % (self.node, vmid), post_data)
+        return data
 
+    def postKvmStop(self, vmid, post_data=None):
+        """
+        :param vmid:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/status/stop' % (self.node, vmid), post_data)
+        return data
 
+    def postKvmSuspend(self, vmid, post_data=None):
+        """
+        :param vmid:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/status/suspend' % (self.node, vmid), post_data)
+        return data
 
+    """ Other KVM Operations"""
+
+    def postKvmAgent(self, vmid, post_data=None):
+        """
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/agent' % (self.node, vmid), post_data)
+        return data
+
+    def postKvmClone(self, vmid , post_data=None):
+        """
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/clone' % (self.node, vmid), post_data)
+        return data
+
+    def getKvmConfig(self, vmid):
+        """
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/config' % (self.node, vmid), None)
+        return data
+
+    def postKvmCreateConfig(self, vmid , post_data=None):
+        """
+        Set virtual machine options
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/config' % (self.node, vmid), post_data)
+        return data
+
+    def putKvmConfig(self, vmid, post_data=None):
+        """
+        Set virtual machine options (synchrounous API) - You should consider using the POST method instead for any actions involving hotplug or storage allocation.
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/config' % (self.node, vmid), post_data)
+        return data
+
+    def getKvmFeature(self, vmid):
+        """
+        Check if feature for virtual machine is available.
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/feature' % (self.node, vmid), None)
+        return data
+
+    def postKvmMigrate(self, vmid, post_data=None):
+        """
+        Migrate virtual machine. Creates a new migration task.
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/migrate' % (self.node, vmid), post_data)
+        return data
+
+    def postKvmMonitor(self, vmid, post_data=None):
+        """
+        Execute Qemu monitor commands.
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/monitor' % (self.node, vmid), post_data)
+        return data
+
+    def postKvmMoveDisk(self, vmid, post_data=None):
+        """
+        Execute Qemu monitor commands.
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/move_disk' % (self.node, vmid), post_data)
+        return data
+
+    def getKvmPendingChanges(self, vmid):
+        """
+        Get virtual machine configuration, including pending changes.
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', 'nodes/%s/qemu/%s/pending' % (self.node, vmid), None)
+        return data
 

@@ -354,3 +354,81 @@ class pypve:
         data = self.connect('get', 'nodes/%s/qemu/%s/pending' % (self.node, vmid), None)
         return data
 
+    def putKvmResize(self, vmid, post_data=None):
+        """
+
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/resize' % (self.node, vmid), post_data)
+        return data
+
+    def getKvmRRD(self, vmid):
+        """Read VM RRD statistics. Returns JSON"""
+        data = self.connect('get', 'nodes/%s/qemu/%s/rrd' % (self.node, vmid), None)
+        return data
+
+    def getKvmRRDData(self, vmid):
+        """Read VM RRD statistics. Returns JSON"""
+        data = self.connect('get', 'nodes/%s/qemu/%s/rrddata' % (self.node, vmid), None)
+        return data
+
+    def putKvmSendKey(self, vmid, post_data=None):
+        """
+        Send key event to virtual machine.
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/sendkey' % (self.node, vmid), post_data)
+        return data
+
+    def postKvmSpiceProxy(self, vmid, post_data=None):
+        """
+        Returns a SPICE configuration to connect to the VM.
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/spiceproxy' % (self.node, vmid), post_data)
+        return data
+
+    def postCreateKvmTemplate(self, vmid, post_data=None):
+        """
+        Create a Template.
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('post', 'nodes/%s/qemu/%s/template' % (self.node, vmid), post_data)
+        return data
+
+    def putUnlinkKvmDiskImages(self, vmid, post_data=None):
+        """
+        Unlink/delete disk images.
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('put', 'nodes/%s/qemu/%s/unlink' % (self.node, vmid), post_data)
+        return data
+
+    def postKvmVncProxy(self, vmid, post_data=None):
+        """
+        Creates a VNC Proxy for a virtual machine. Returns JSON
+        :param vmid:
+        :param post_data:
+        :return:
+        """
+        data = self.connect('post', "nodes/%s/qemu/%s/vncproxy" % (self.node, vmid), post_data)
+        return data
+
+    def getWebSocketTraffic(self, vmid):
+        """
+        Opens a weksocket for VNC traffic.
+        :param vmid:
+        :return:
+        """
+        data = self.connect('get', "nodes/%s/qemu/%s/vncwebsocket" % (self.node, vmid), None)
+        return data

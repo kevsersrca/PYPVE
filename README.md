@@ -6,7 +6,7 @@ Doc link : https://pve.proxmox.com/wiki/Main_Page
 ## Getting Started
 
 ```
-client = proxmoxx('node1.example.com','client@pve','password')
+client = pypve('node1.example.com','client@pve','password')
 client.node = 'pve'
 getIndex = client.getKvmIndex()
 
